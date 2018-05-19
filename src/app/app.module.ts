@@ -1,18 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { PagesGuard } from './pages.guard';
+
+const routes: Routes = [
+  {
+    loadChildren: './protected/protected.module#ProtectedModule',
+    canLoad: [PagesGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
+  }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    AuthModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
