@@ -1,3 +1,42 @@
-<form>
-  Sign up form here
+<h3 class="text-center">Sign up</h3>
+<form novalidate (submit)="register($event)" [formGroup]="user" #form="ngForm" [class.was-validated]="form.submitted">
+  <fieldset class="form-group">
+    <label class="field-name" for="first-name">First name:</label>
+    <input class="form-control" formControlName="firstName" id="first-name" type="text">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">First name is required</div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label class="field-name" for="last-name">Last name:</label>
+    <input class="form-control" formControlName="secondName" id="last-name" type="text">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Second name is required</div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label class="field-name" for="email">Email:</label>
+    <input class="form-control" formControlName="email" id="email" type="email">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Email is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('email')">Incorrect format</div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label class="field-name" for="password">Password:</label>
+    <input class="form-control" formControlName="password" id="password" type="password">
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('required')">Password is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</div>
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</div>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label class="field-name" for="password-prepeat">Repeat password:</label>
+    <input class="form-control" formControlName="passwordRepeat" id="password-prepeat" type="password">
+    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('required')">Repeat password field is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('passwordRepeat')">Passwords don't match</div>
+  </fieldset>
+
+  <button type="submit" class="btn btn-primary btn-block">Register</button>
+
+  <p class="text-center">Already have an account?
+    <a routerLink="/login">Sign in</a>
+  </p>
 </form>

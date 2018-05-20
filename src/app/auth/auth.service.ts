@@ -27,7 +27,25 @@ export class AuthService {
         this.user = user;
       })
     ); */
-    return of({ email: 'my@gmail.com', name: 'Test name' }).pipe(
+    return of({
+      email: 'my@gmail.com',
+      firstName: 'First',
+      secondName: 'Second'
+    }).pipe(
+      tap((user: User) => {
+        this.user = user;
+      })
+    );
+  }
+
+  register(userData: User) {
+    // return this.http.post<User>('/api/register', userData).pipe(
+    //   tap((user: User) => {
+    //     this.user = user;
+    //   })
+    // );
+    const { email, firstName, secondName } = userData;
+    return of({ email, firstName, secondName }).pipe(
       tap((user: User) => {
         this.user = user;
       })
