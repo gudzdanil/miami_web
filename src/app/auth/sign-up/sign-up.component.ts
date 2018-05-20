@@ -1,42 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'mi-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
+export class SignUpComponent {
+  user: FormGroup;
 
-export class SignUpComponent implements OnInit {
-	user: FormGroup;
-	userPasword;
-	userFirstName;
-	userSecondName;
-	
-	constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.createForm();
   }
-	
-	createForm() {
-		this.user = this.fb.group({
-			'firstName': ['',[ Validators.required, Validators.minLength(1)]],
-			'secondName': ['', [Validators.required, Validators.minLength(1)]],
-			'email': ['', [Validators.required, Validators.email]],
-			'passwords': this.fb.group({
-      	password1: ['', [Validators.required, Validators.minLength(6)]],
-      	password2: ['', Validators.required, Validators.minLength(6)]]
-    	}, {validator: this.matchValidator})
-		})
-	}
-	
-	matchValidator() {
-		
-	}
-	
-	register($event) {
-		if (this.user.invalid) return;
-		this.auth.logIn(this.user.value).subscribe(() => {
+
+  createForm() {
+    this.user = this.fb.group({
+      firstName: ['', Validators.required],
+      secondName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(12)]
+      ],
+      passwordRepeat: [
+        '',
+        [
+          Validators.required,
+          (control: AbstractControl) => this.matchValidator(control.value)
+        ]
+      ]
+    });
+  }
+
+  matchValidator(password: string): ValidationErrors {
+    if (this.user && password !== this.user.get('password').value) {
+      return {
+        passwordRepeat: true
+      };
+    }
+    return null;
+  }
+
+  register($event) {
+    if (this.user.invalid) {
+      return;
+    }
+    this.auth.register(this.user.value).subscribe(() => {
       this.router.navigate(['panel']);
     });
-	}
+  }
 }

@@ -1,39 +1,42 @@
 <h3 class="text-center">Sign up</h3>
-<form novalidate (submit)="register($event)" #form="ngForm" [class.was-validated]="form.submitted">
-	<fieldset class="form-group">
+<form novalidate (submit)="register($event)" [formGroup]="user" #form="ngForm" [class.was-validated]="form.submitted">
+  <fieldset class="form-group">
     <label class="field-name" for="first-name">First name:</label>
-    <input class="form-control" id="first-name" type="text">
+    <input class="form-control" formControlName="firstName" id="first-name" type="text">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">First name is required</div>
   </fieldset>
-  	
+
   <fieldset class="form-group">
     <label class="field-name" for="last-name">Last name:</label>
-    <input class="form-control" id="last-name" type="text">
+    <input class="form-control" formControlName="secondName" id="last-name" type="text">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Second name is required</div>
   </fieldset>
-  
+
   <fieldset class="form-group">
     <label class="field-name" for="email">Email:</label>
-    <input class="form-control" id="email" type="text">
-    <div class="invalid-feedback" *ngIf="!user.get('email').hasError('required')">Email is required</div>
-    <div class="invalid-feedback" *ngIf="!user.get('email').hasError('email')">Invalid format</div>
+    <input class="form-control" formControlName="email" id="email" type="email">
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Email is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('email').hasError('email')">Incorrect format</div>
   </fieldset>
-  
-<!--
+
   <fieldset class="form-group">
-    <label class="field-name" for="password1">Password:</label>
-    <input class="form-control" id="password1"  type="password">
-     <div class="invalid-feedback" *ngIf="user.get('password1').hasError('required')">Password is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('password1').hasError('minlength')">Password should have not less than 6 characters</div>
-    <div class="invalid-feedback" *ngIf="user.get('password1').hasError('maxlength')">Password should have not more than 12 characters</div>
-    <div class="invalid-feedback" *ngIf="user.get('password1') !== user.get('password2')">passwords don't match</div>
+    <label class="field-name" for="password">Password:</label>
+    <input class="form-control" formControlName="password" id="password" type="password">
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('required')">Password is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</div>
+    <div class="invalid-feedback" *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</div>
   </fieldset>
-  
-  <fieldset>
-   	<label class="field-name" for="password2">Confirm password:</label>
-    <input class="form-control" id="password2"  type="password">
-     <div class="invalid-feedback" *ngIf="user.get('password2').hasError('required')">Confirm password</div>
-     <div class="invalid-feedback" *ngIf="user.get('password1') !== user.get('password2')">Passwords don't match</div>
+
+  <fieldset class="form-group">
+    <label class="field-name" for="password-prepeat">Repeat password:</label>
+    <input class="form-control" formControlName="passwordRepeat" id="password-prepeat" type="password">
+    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('required')">Repeat password field is required</div>
+    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('passwordRepeat')">Passwords don't match</div>
   </fieldset>
--->
-  
+
   <button type="submit" class="btn btn-primary btn-block">Register</button>
+
+  <p class="text-center">Already have an account?
+    <a routerLink="/login">Sign in</a>
+  </p>
 </form>
