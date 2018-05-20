@@ -1,3 +1,20 @@
-<form>
-  Sign in form here
-</form>
+<div class="enter">
+	<h1>Awesome Form</h1>
+	<form [formGroup]="signIn" class="signIn">
+	
+		<label class="fild">
+ 			<span class="fild-name">login:</span>
+  		<input class="form-control" formControlName="name">
+		</label>
+		<div class="alert" *ngIf="!signIn.controls['name'].valid && signIn.controls['name'].touched">*{{ titleAlert }}</div>
+		
+		<label class="fild">
+ 			<span class="fild-name">password:</span>
+  		<input class="form-control" formControlName="password" type="password">
+		</label>
+		<div class="alert" *ngIf="!signIn.controls['password'].valid && signIn.controls['password'].touched">*{{ titleAlert }}</div>
+		
+		<input type="submit" class="submit" value="submit form" [disabled]="!signIn.valid">
+		
+	</form>
+</div>
