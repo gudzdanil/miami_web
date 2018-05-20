@@ -1,23 +1,26 @@
-<h3 class="text-center">Sign in here</h3>
+<h3>Sign in</h3>
 <form [formGroup]="user" novalidate (submit)="submit($event)" #form="ngForm" [class.was-validated]="form.submitted">
-  <fieldset class="form-group">
-    <label class="field-name" for="email">Email:</label>
-    <input class="form-control" id="email" formControlName="email" type="email">
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Email is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('email')">Invalid format</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" type="email">
+    <mat-error *ngIf="user.get('email').hasError('required')">
+      Email is
+      <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="user.get('email').hasError('email')">
+      Invalid format
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="user.get('password').hasError('required')">Password is required</mat-error>
+    <mat-error *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</mat-error>
+    <mat-error *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</mat-error>
+  </mat-form-field>
 
-  <fieldset class="form-group">
-    <label class="field-name" for="password">Password:</label>
-    <input class="form-control" id="password" formControlName="password" type="password">
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('required')">Password is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</div>
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</div>
-  </fieldset>
+  <button mat-raised-button color="primary" type="submit">Login</button>
 
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
-
-  <p class="text-center">Have no account?
+  <p>Have no account?
     <a routerLink="/signup">Sign up</a>
   </p>
 </form>

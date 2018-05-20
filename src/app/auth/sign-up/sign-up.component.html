@@ -1,42 +1,37 @@
-<h3 class="text-center">Sign up</h3>
+<h3>Sign up</h3>
 <form novalidate (submit)="register($event)" [formGroup]="user" #form="ngForm" [class.was-validated]="form.submitted">
-  <fieldset class="form-group">
-    <label class="field-name" for="first-name">First name:</label>
-    <input class="form-control" formControlName="firstName" id="first-name" type="text">
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">First name is required</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="First name" formControlName="firstName" type="text">
+    <mat-error *ngIf="user.get('email').hasError('required')">First name is required</mat-error>
+  </mat-form-field>
 
-  <fieldset class="form-group">
-    <label class="field-name" for="last-name">Last name:</label>
-    <input class="form-control" formControlName="secondName" id="last-name" type="text">
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Second name is required</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="Last name" formControlName="secondName" type="text">
+    <mat-error *ngIf="user.get('email').hasError('required')">Second name is required</mat-error>
+  </mat-form-field>
 
-  <fieldset class="form-group">
-    <label class="field-name" for="email">Email:</label>
-    <input class="form-control" formControlName="email" id="email" type="email">
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('required')">Email is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('email').hasError('email')">Incorrect format</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" type="email">
+    <mat-error *ngIf="user.get('email').hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="user.get('email').hasError('email')">Incorrect format</mat-error>
+  </mat-form-field>
 
-  <fieldset class="form-group">
-    <label class="field-name" for="password">Password:</label>
-    <input class="form-control" formControlName="password" id="password" type="password">
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('required')">Password is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</div>
-    <div class="invalid-feedback" *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password" type="password">
+    <mat-error *ngIf="user.get('password').hasError('required')">Password is required</mat-error>
+    <mat-error *ngIf="user.get('password').hasError('minlength')">Password should have not less than 6 characters</mat-error>
+    <mat-error *ngIf="user.get('password').hasError('maxlength')">Password should have not more than 12 characters</mat-error>
+  </mat-form-field>
 
-  <fieldset class="form-group">
-    <label class="field-name" for="password-prepeat">Repeat password:</label>
-    <input class="form-control" formControlName="passwordRepeat" id="password-prepeat" type="password">
-    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('required')">Repeat password field is required</div>
-    <div class="invalid-feedback" *ngIf="user.get('passwordRepeat').hasError('passwordRepeat')">Passwords don't match</div>
-  </fieldset>
+  <mat-form-field>
+    <input matInput placeholder="Repeat password" formControlName="passwordRepeat" type="password">
+    <mat-error *ngIf="user.get('passwordRepeat').hasError('required')">Repeat password field is required</mat-error>
+    <mat-error *ngIf="user.get('passwordRepeat').hasError('passwordRepeat')">Passwords don't match</mat-error>
+  </mat-form-field>
 
-  <button type="submit" class="btn btn-primary btn-block">Register</button>
+  <button mat-raised-button color="primary" type="submit">Register</button>
 
-  <p class="text-center">Already have an account?
+  <p>Already have an account?
     <a routerLink="/login">Sign in</a>
   </p>
 </form>

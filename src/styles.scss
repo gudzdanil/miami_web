@@ -1,15 +1,1 @@
-@import "~bootstrap/scss/bootstrap";
-.form-control,
-.custom-select {
-  .was-validated &.ng-invalid {
-    border-color: $form-feedback-invalid-color;
-    &:focus {
-      border-color: $form-feedback-invalid-color;
-      box-shadow: 0 0 0 $input-focus-width rgba($form-feedback-invalid-color, .25);
-    }
-    ~.invalid-feedback,
-    ~.invalid-tooltip {
-      display: block;
-    }
-  }
-}
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignInComponent {
   user: FormGroup;
+  hidePassword = true;
 
   constructor(
     private fb: FormBuilder,

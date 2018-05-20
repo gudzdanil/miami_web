@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AuthWrapperComponent } from './auth/auth-wrapper/auth-wrapper.component';
 import { AuthModule, authRoutes } from './auth/auth.module';
@@ -35,9 +35,9 @@ const routes: Routes = [
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes, { enableTracing: true }),
-    NgbModule.forRoot(),
     AuthModule
   ],
   bootstrap: [AppComponent]
