@@ -4,11 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
+import { AuthWrapperComponent } from './auth/auth-wrapper/auth-wrapper.component';
 import { AuthModule, authRoutes } from './auth/auth.module';
 import { PagesGuard } from './pages.guard';
 
 const routes: Routes = [
-  ...authRoutes,
+  {
+    path: '',
+    component: AuthWrapperComponent,
+    children: [
+      ...authRoutes,
+      {
+        path: '**',
+        redirectTo: '/login'
+      }
+    ]
+  },
   {
     path: 'panel',
     loadChildren: './protected/protected.module#ProtectedModule',
