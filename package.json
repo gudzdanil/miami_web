@@ -9,10 +9,6 @@
     "lint": "ng lint",
     "postinstall": "ng build --prod"
   },
-  "engines": {
-    "node": "v9.5.1",
-    "npm": "6.0.0"
-  },
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~0.6.3",
