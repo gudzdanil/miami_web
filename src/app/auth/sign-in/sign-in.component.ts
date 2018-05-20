@@ -33,7 +33,7 @@ export class SignInComponent {
     if (this.user.invalid) {
       return;
     }
-    this.auth.logIn(this.user.value).subscribe(() => {
+		this.auth.logIn(this.user.value).subscribe(() => {
       this.router.navigate(['panel']);
     });
   }
