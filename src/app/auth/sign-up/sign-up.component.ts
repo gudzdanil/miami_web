@@ -6,11 +6,10 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { ModalSuccessComponent } from '../../modals/modal-success/modal-success.component';
-import { ModalErrorComponent } from '../../modals/modal-error/modal-error.component';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'mi-sign-up',
