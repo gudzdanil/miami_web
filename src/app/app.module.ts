@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,27 +7,20 @@ import { AppComponent } from './app.component';
 import { AuthWrapperComponent } from './auth/auth-wrapper/auth-wrapper.component';
 import { AuthModule, authRoutes } from './auth/auth.module';
 import { PagesGuard } from './pages.guard';
+import { CustomHttpInterceptor } from './http-interceptor';
+import { ModalsModule } from './modals/modals.module';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AuthWrapperComponent,
-    children: [
-      ...authRoutes,
-      {
-        path: '**',
-        redirectTo: '/login'
-      }
-    ]
-  },
   {
     path: 'panel',
     loadChildren: './protected/protected.module#ProtectedModule',
     canLoad: [PagesGuard]
   },
+  ...authRoutes,
   {
     path: '**',
-    redirectTo: '/login'
+    redirectTo: '/panel'
   }
 ];
 
@@ -38,8 +31,12 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes, { enableTracing: true }),
-    AuthModule
+    AuthModule,
+    ModalsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, multi: true, useClass: CustomHttpInterceptor }
+  ]
 })
 export class AppModule {}

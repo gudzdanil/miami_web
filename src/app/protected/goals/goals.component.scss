@@ -1,0 +1,17 @@
+:host {
+  .card-title {
+    mat-icon {
+      float: left;
+    }
+    strong {
+      line-height: 24px;
+      font-size: 18px;
+      margin-left: 6px;
+    }
+  }
+  .add-goal {
+    position: fixed;
+    bottom: 20%;
+    right: 5%;
+  }
+}

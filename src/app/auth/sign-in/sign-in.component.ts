@@ -35,7 +35,7 @@ export class SignInComponent {
       return;
     }
     this.auth.logIn(this.user.value).subscribe(() => {
-      this.router.navigate(['panel']);
+      this.router.navigate(['/panel']);
     });
   }
 }

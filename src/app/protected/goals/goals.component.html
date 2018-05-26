@@ -1,0 +1,14 @@
+<mat-card *ngFor="let goal of goals;trackBy: trackBy">
+  <mat-card-content>
+    <p class="card-title">
+      <mat-icon>{{goal.done ? 'check_box' : 'check_box_outline_blank'}}</mat-icon>
+      <a [routerLink]="[goal.id]">
+        <strong>{{goal.title}}</strong>
+      </a>
+    </p>
+    <p>{{goal.description}}</p>
+  </mat-card-content>
+</mat-card>
+<a mat-fab color="accent" routerLink="create" class="add-goal">
+  <mat-icon>add</mat-icon>
+</a>

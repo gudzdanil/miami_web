@@ -1,1 +1,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(57, 144, 243);
+}

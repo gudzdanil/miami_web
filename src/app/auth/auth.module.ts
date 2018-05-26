@@ -6,23 +6,25 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatDialogModule
 } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthGuard } from './auth.guard';
 
 export const authRoutes: Routes = [
   {
     path: 'login',
-    component: SignInComponent
-    // canActivate: [AuthGuard]
+    component: SignInComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'signup',
-    component: SignUpComponent
-    // canActivate: [AuthGuard]
+    component: SignUpComponent,
+    canActivate: [AuthGuard]
   }
 ];
 @NgModule({
@@ -35,7 +37,8 @@ export const authRoutes: Routes = [
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   declarations: [SignInComponent, SignUpComponent, AuthWrapperComponent],
   exports: [SignInComponent, SignUpComponent, AuthWrapperComponent]

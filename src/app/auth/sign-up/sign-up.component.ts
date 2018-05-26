@@ -8,6 +8,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { MatDialog } from '@angular/material';
+import { ModalSuccessComponent } from '../../modals/modal-success/modal-success.component';
+import { ModalErrorComponent } from '../../modals/modal-error/modal-error.component';
 
 @Component({
   selector: 'mi-sign-up',
@@ -20,7 +23,8 @@ export class SignUpComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.createForm();
   }
@@ -57,8 +61,11 @@ export class SignUpComponent {
     if (this.user.invalid) {
       return;
     }
-    this.auth.register(this.user.value).subscribe(() => {
-      this.router.navigate(['panel']);
+    this.auth.register(this.user.value).subscribe(({ error, message }) => {
+      const dialogRef = this.dialog.open(ModalSuccessComponent, {
+        data: { message }
+      });
+      dialogRef.afterClosed().subscribe(() => this.router.navigate(['login']));
     });
   }
 }
